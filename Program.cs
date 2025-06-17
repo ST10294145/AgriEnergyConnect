@@ -1,5 +1,5 @@
 using AgriEnergyConnect.Data;
-using AgriEnergyConnect.Models; // <-- Add this for ApplicationUser
+using AgriEnergyConnect.Models; // For ApplicationUser
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +11,7 @@ namespace AgriEnergyConnect
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Database connection
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -20,21 +20,24 @@ namespace AgriEnergyConnect
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+            // Identity setup with roles
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
             })
-            .AddRoles<IdentityRole>() // Enable roles
+            .AddRoles<IdentityRole>() // Enable role support
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
-            // Seed roles
+            // Create roles if they don't exist
             using (var scope = app.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
                 string[] roles = new[] { "Employee", "Farmer" };
 
                 foreach (var role in roles)
@@ -46,7 +49,7 @@ namespace AgriEnergyConnect
                 }
             }
 
-            // Configure the HTTP request pipeline.
+            // Middleware pipeline
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
@@ -62,7 +65,7 @@ namespace AgriEnergyConnect
 
             app.UseRouting();
 
-            app.UseAuthentication(); // <-- Don't forget this!
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
