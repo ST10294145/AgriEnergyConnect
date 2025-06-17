@@ -13,6 +13,6 @@ namespace AgriEnergyConnect.Data
         }
 
         // Add DbSet for reports later here:
-        public DbSet<Report> Reports { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
