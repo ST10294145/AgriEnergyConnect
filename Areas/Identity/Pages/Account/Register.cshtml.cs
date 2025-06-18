@@ -48,6 +48,16 @@ namespace AgriEnergyConnect.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Full Name")]
+            public string Name { get; set; }
+
+            [Required]
+            public string Province { get; set; }
+
+            [Required]
+            public string Department { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -79,6 +89,11 @@ namespace AgriEnergyConnect.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                // Assign extra fields
+                user.Name = Input.Name;
+                user.Province = Input.Province;
+                user.Department = Input.Department;
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -87,7 +102,6 @@ namespace AgriEnergyConnect.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // ✅ Assign "Employee" role
                     await _userManager.AddToRoleAsync(user, "Employee");
 
                     var userId = await _userManager.GetUserIdAsync(user);
