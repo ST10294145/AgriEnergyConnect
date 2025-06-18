@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace AgriEnergyConnect.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string Role { get; set; }              // "Employee" or "Farmer"
-        public string? CreatedByEmployeeId { get; set; }  // For farmers, links to their creator
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Province { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string Department { get; set; }
     }
 }
-
-
-
-
-
