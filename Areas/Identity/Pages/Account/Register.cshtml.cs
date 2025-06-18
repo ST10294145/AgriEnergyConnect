@@ -21,21 +21,23 @@ namespace AgriEnergyConnect.Areas.Identity.Pages.Account
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        // Commenting out IEmailSender as email sending is disabled
+        // private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            ILogger<RegisterModel> logger
+            // , IEmailSender emailSender
+            )
         {
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            // _emailSender = emailSender;
         }
 
         [BindProperty]
@@ -104,6 +106,8 @@ namespace AgriEnergyConnect.Areas.Identity.Pages.Account
 
                     await _userManager.AddToRoleAsync(user, "Employee");
 
+                    /*
+                    // Email confirmation code commented out
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -125,6 +129,11 @@ namespace AgriEnergyConnect.Areas.Identity.Pages.Account
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
+                    */
+
+                    // Just sign in user immediately
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
                 }
 
                 foreach (var error in result.Errors)
