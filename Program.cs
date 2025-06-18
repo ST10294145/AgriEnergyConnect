@@ -20,19 +20,20 @@ namespace AgriEnergyConnect
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            // Identity setup with roles
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+            //Identity setup for ApplicationUser with Roles
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
             })
-            .AddRoles<IdentityRole>() // Enable role support
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
-            // Create roles if they don't exist
+            //Create roles if they don't exist
             using (var scope = app.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
