@@ -12,7 +12,7 @@ namespace AgriEnergyConnect.Data
         {
         }
 
-        // Add DbSet for reports later here:
+        
         public DbSet<Product> Products { get; set; }
     }
 }
