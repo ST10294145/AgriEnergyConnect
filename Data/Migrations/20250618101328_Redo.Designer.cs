@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AgriEnergyConnect.Migrations
+namespace AgriEnergyConnect.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250618101328_Redo")]
