@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using AgriEnergyConnect.Data;              // Add this for DbContext
+using AgriEnergyConnect.Data;              // DbContext namespace
 using AgriEnergyConnect.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,12 +12,12 @@ namespace AgriEnergyConnect.Controllers
     public class EmployeeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationDbContext _context;  // Add DbContext
+        private readonly ApplicationDbContext _context;  // DbContext for FarmerProfile
 
         public EmployeeController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
-            _context = context;  // Assign DbContext
+            _context = context;
         }
 
         // GET: Show the Register Farmer form
@@ -34,43 +34,41 @@ namespace AgriEnergyConnect.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            // Create the user first
             var farmer = new ApplicationUser
             {
                 UserName = model.Email,
                 Email = model.Email,
                 Name = model.Name
-                // Location NOT in ApplicationUser
+                // Location is stored in FarmerProfile, not here
             };
 
             var result = await _userManager.CreateAsync(farmer, model.Password);
 
             if (result.Succeeded)
             {
-                // Assign role
                 await _userManager.AddToRoleAsync(farmer, "Farmer");
 
-                // Create FarmerProfile linked to the user
+                // Create FarmerProfile with Name and Location from ViewModel
                 var farmerProfile = new FarmerProfile
                 {
                     UserId = farmer.Id,
+                    Name = model.Name,      // Must set Name here to avoid NULL insert error
                     Location = model.Location
                 };
 
                 _context.FarmerProfiles.Add(farmerProfile);
                 await _context.SaveChangesAsync();
 
-                // Show success and clear form
                 ViewBag.Message = "Farmer account created successfully.";
                 ModelState.Clear();
                 return View();
             }
 
-            // Show errors if any
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+
             return View(model);
         }
     }
@@ -84,7 +82,7 @@ namespace AgriEnergyConnect.Controllers
 
         [Required]
         [Display(Name = "Location")]
-        public string Location { get; set; }   // Include Location here
+        public string Location { get; set; }
 
         [Required]
         [EmailAddress]
