@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using AgriEnergyConnect.Data;              // Add this for DbContext
 using AgriEnergyConnect.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,10 +12,12 @@ namespace AgriEnergyConnect.Controllers
     public class EmployeeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;  // Add DbContext
 
-        public EmployeeController(UserManager<ApplicationUser> userManager)
+        public EmployeeController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
+            _context = context;  // Assign DbContext
         }
 
         // GET: Show the Register Farmer form
@@ -31,35 +34,43 @@ namespace AgriEnergyConnect.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            // Create the user first
             var farmer = new ApplicationUser
             {
                 UserName = model.Email,
                 Email = model.Email,
-                Name = model.Name,
-                Location = model.Location
-                // FarmerId will be auto-generated
+                Name = model.Name
+                // Location NOT in ApplicationUser
             };
 
             var result = await _userManager.CreateAsync(farmer, model.Password);
 
             if (result.Succeeded)
             {
+                // Assign role
                 await _userManager.AddToRoleAsync(farmer, "Farmer");
 
-                // Option 1: Show success message and clear form
+                // Create FarmerProfile linked to the user
+                var farmerProfile = new FarmerProfile
+                {
+                    UserId = farmer.Id,
+                    Location = model.Location
+                };
+
+                _context.FarmerProfiles.Add(farmerProfile);
+                await _context.SaveChangesAsync();
+
+                // Show success and clear form
                 ViewBag.Message = "Farmer account created successfully.";
                 ModelState.Clear();
                 return View();
-
-                // Option 2: Redirect to confirmation or dashboard
-                // return RedirectToAction("FarmerList");
             }
 
+            // Show errors if any
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
-
             return View(model);
         }
     }
@@ -73,7 +84,7 @@ namespace AgriEnergyConnect.Controllers
 
         [Required]
         [Display(Name = "Location")]
-        public string Location { get; set; }
+        public string Location { get; set; }   // Include Location here
 
         [Required]
         [EmailAddress]
