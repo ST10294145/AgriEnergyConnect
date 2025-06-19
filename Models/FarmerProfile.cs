@@ -12,8 +12,8 @@ namespace AgriEnergyConnect.Models
         [Required]
         public string UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public ApplicationUser User { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual ApplicationUser User { get; set; }
 
         [Required]
         [StringLength(100)]
