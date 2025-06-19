@@ -15,12 +15,5 @@ namespace AgriEnergyConnect.Models
 
         [StringLength(100)]
         public string? Department { get; set; }
-
-        //Make it non-nullable to allow IDENTITY
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int FarmerId { get; set; }
-
-        [StringLength(100)]
-        public string? Location { get; set; }
     }
 }
