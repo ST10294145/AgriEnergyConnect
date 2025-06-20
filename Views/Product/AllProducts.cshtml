@@ -11,17 +11,17 @@
 
         <div class="col-auto">
             <label for="category" class="form-label">Category:</label>
-            <input type="text" name="category" id="category" value="@(ViewContext.HttpContext.Request.Query["category"])" class="form-control" />
+            <input type="text" name="category" id="category" value="@(ViewData["CategoryFilter"] ?? "")" class="form-control" />
         </div>
 
         <div class="col-auto">
             <label for="startDate" class="form-label">Start Date:</label>
-            <input type="date" name="startDate" id="startDate" value="@(ViewContext.HttpContext.Request.Query["startDate"])" class="form-control" />
+            <input type="date" name="startDate" id="startDate" value="@(ViewData["StartDateFilter"] ?? "")" class="form-control" />
         </div>
 
         <div class="col-auto">
             <label for="endDate" class="form-label">End Date:</label>
-            <input type="date" name="endDate" id="endDate" value="@(ViewContext.HttpContext.Request.Query["endDate"])" class="form-control" />
+            <input type="date" name="endDate" id="endDate" value="@(ViewData["EndDateFilter"] ?? "")" class="form-control" />
         </div>
 
         <div class="col-auto">
@@ -31,7 +31,6 @@
 
     </div>
 </form>
-
 
 <table class="table table-striped">
     <thead>
