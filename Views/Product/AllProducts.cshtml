@@ -1,0 +1,65 @@
+﻿@model IEnumerable<AgriEnergyConnect.Models.Product>
+
+@{
+    ViewData["Title"] = "All Products";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="get" asp-action="AllProducts" class="mb-4">
+    <div class="row g-3 align-items-center">
+
+        <div class="col-auto">
+            <label for="category" class="form-label">Category:</label>
+            <input type="text" name="category" id="category" value="@(ViewContext.HttpContext.Request.Query["category"])" class="form-control" />
+        </div>
+
+        <div class="col-auto">
+            <label for="startDate" class="form-label">Start Date:</label>
+            <input type="date" name="startDate" id="startDate" value="@(ViewContext.HttpContext.Request.Query["startDate"])" class="form-control" />
+        </div>
+
+        <div class="col-auto">
+            <label for="endDate" class="form-label">End Date:</label>
+            <input type="date" name="endDate" id="endDate" value="@(ViewContext.HttpContext.Request.Query["endDate"])" class="form-control" />
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mt-4">Filter</button>
+            <a asp-action="AllProducts" class="btn btn-secondary mt-4 ms-2">Reset</a>
+        </div>
+
+    </div>
+</form>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Farmer Name</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Production Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="4" class="text-center">No products found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Farmer?.Name ?? "Unknown"</td>
+                    <td>@product.Name</td>
+                    <td>@product.Category</td>
+                    <td>@product.ProductionDate.ToShortDateString()</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
