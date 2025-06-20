@@ -61,22 +61,28 @@ namespace AgriEnergyConnect.Controllers
         {
             var query = _context.Products.Include(p => p.Farmer).AsQueryable();
 
-            if (!string.IsNullOrEmpty(category))
+            if (!string.IsNullOrWhiteSpace(category))
             {
-                query = query.Where(p => p.Category == category);
+                var normalizedCategory = category.Trim().ToLower();
+                query = query.Where(p => p.Category.ToLower().Contains(normalizedCategory));
             }
 
             if (startDate.HasValue)
             {
-                query = query.Where(p => p.ProductionDate >= startDate);
+                query = query.Where(p => p.ProductionDate >= startDate.Value.Date);
             }
 
             if (endDate.HasValue)
             {
-                query = query.Where(p => p.ProductionDate <= endDate);
+                query = query.Where(p => p.ProductionDate <= endDate.Value.Date);
             }
 
             var products = await query.ToListAsync();
+
+            ViewData["CategoryFilter"] = category;
+            ViewData["StartDateFilter"] = startDate?.ToString("yyyy-MM-dd");
+            ViewData["EndDateFilter"] = endDate?.ToString("yyyy-MM-dd");
+
             return View(products);
         }
     }
