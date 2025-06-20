@@ -44,7 +44,10 @@
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Register Farmer</button> 
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Register Farmer</button>
+        <a class="btn btn-outline-secondary" asp-area="Identity" asp-page="/Account/Login">Go to Login</a>
+    </div>
 </form>
 
 @section Scripts {
