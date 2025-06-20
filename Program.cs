@@ -11,7 +11,6 @@ namespace AgriEnergyConnect
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Database connection
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -20,7 +19,6 @@ namespace AgriEnergyConnect
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            //Identity setup for ApplicationUser with Roles
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -33,7 +31,6 @@ namespace AgriEnergyConnect
 
             var app = builder.Build();
 
-            //Create roles if they don't exist
             using (var scope = app.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -50,7 +47,6 @@ namespace AgriEnergyConnect
                 }
             }
 
-            // Middleware pipeline
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
