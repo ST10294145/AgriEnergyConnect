@@ -45,14 +45,15 @@ namespace AgriEnergyConnect.Controllers
         [Authorize(Roles = "Farmer")]
         public async Task<IActionResult> Create(Product product)
         {
-            if (!ModelState.IsValid)
+            var user = await _userManager.GetUserAsync(User);
+            product.FarmerId = user.Id; // Set FarmerId before validation
+
+            if (!TryValidateModel(product))
             {
                 TempData["Error"] = "Model is invalid. Please check all required fields.";
                 return View(product);
             }
 
-            var user = await _userManager.GetUserAsync(User);
-            product.FarmerId = user.Id;
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
