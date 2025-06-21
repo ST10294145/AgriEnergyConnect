@@ -6,10 +6,6 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<!-- Show validation summary -->
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-<!-- Show TempData messages -->
 @if (TempData["Error"] != null)
 {
     <div class="alert alert-danger">@TempData["Error"]</div>
@@ -18,6 +14,8 @@
 {
     <div class="alert alert-success">@TempData["Success"]</div>
 }
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 <form asp-action="Create" method="post">
     <div class="mb-3">
