@@ -4,6 +4,107 @@
     ViewData["Title"] = "All Products";
 }
 
+<style>
+    /* Farming theme colors */
+    body {
+        background-color: #f5f9f2;
+        color: #3e4e1f;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        color: #556b2f;
+        font-weight: 700;
+        text-shadow: 1px 1px 2px #c4d6a7;
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        color: #556b2f;
+        font-weight: 600;
+    }
+
+    input.form-control {
+        border: 1.5px solid #7a9e3f;
+        border-radius: 4px;
+        color: #3e4e1f;
+        background-color: #f9fbf1;
+    }
+
+        input.form-control:focus {
+            border-color: #90b33f;
+            box-shadow: 0 0 5px #a7c35f;
+            outline: none;
+        }
+
+    .btn-primary {
+        background-color: #4f6525;
+        border-color: #4f6525;
+        color: white;
+        font-weight: 600;
+    }
+
+        .btn-primary:hover {
+            background-color: #667a2a;
+            border-color: #667a2a;
+            color: white;
+        }
+
+    .btn-secondary {
+        background-color: #a0b93f;
+        border-color: #a0b93f;
+        color: white;
+        font-weight: 600;
+    }
+
+        .btn-secondary:hover {
+            background-color: #879b2c;
+            border-color: #879b2c;
+            color: white;
+        }
+
+    table {
+        background-color: #e8f0d9;
+        border: 1px solid #a0b93f;
+        border-collapse: collapse;
+    }
+
+        table thead {
+            background-color: #a0b93f;
+            color: #f5f9f2;
+            font-weight: 700;
+        }
+
+            table thead th {
+                border: 1px solid #8b9a33;
+                padding: 0.75rem 1rem;
+            }
+
+        table tbody td {
+            border: 1px solid #c2d176;
+            padding: 0.6rem 1rem;
+            color: #3e4e1f;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9fbf1;
+        }
+
+        table tbody tr:hover {
+            background-color: #dbe6af;
+        }
+
+    /* Responsive form spacing */
+    @@media (max-width: 767px) {
+        .row.g-3 > div
+
+    {
+        margin-bottom: 1rem;
+    }
+
+    }
+</style>
+
 <h2>@ViewData["Title"]</h2>
 
 <form method="get" asp-action="AllProducts" class="mb-4">

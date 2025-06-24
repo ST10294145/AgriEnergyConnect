@@ -4,6 +4,84 @@
     ViewData["Title"] = "Add New Product";
 }
 
+<style>
+    /* Farming theme colors */
+    body {
+        background-color: #f5f9f2;
+        color: #3e4e1f;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        color: #556b2f;
+        font-weight: 700;
+        text-shadow: 1px 1px 2px #c4d6a7;
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        color: #556b2f;
+        font-weight: 600;
+    }
+
+    input.form-control {
+        border: 1.5px solid #7a9e3f;
+        border-radius: 4px;
+        color: #3e4e1f;
+        background-color: #f9fbf1;
+    }
+
+        input.form-control:focus {
+            border-color: #90b33f;
+            box-shadow: 0 0 5px #a7c35f;
+            outline: none;
+        }
+
+    .btn-primary {
+        background-color: #4f6525;
+        border-color: #4f6525;
+        color: white;
+        font-weight: 600;
+    }
+
+        .btn-primary:hover {
+            background-color: #667a2a;
+            border-color: #667a2a;
+            color: white;
+        }
+
+    .btn-secondary {
+        background-color: #a0b93f;
+        border-color: #a0b93f;
+        color: white;
+        font-weight: 600;
+    }
+
+        .btn-secondary:hover {
+            background-color: #879b2c;
+            border-color: #879b2c;
+            color: white;
+        }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #842029;
+        border-color: #f5c2c7;
+        border-radius: 4px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .alert-success {
+        background-color: #d1e7dd;
+        color: #0f5132;
+        border-color: #badbcc;
+        border-radius: 4px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+    }
+</style>
+
 <h2>@ViewData["Title"]</h2>
 
 @if (TempData["Error"] != null)

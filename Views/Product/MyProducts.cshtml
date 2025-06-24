@@ -4,6 +4,61 @@
     ViewData["Title"] = "My Products";
 }
 
+<style>
+    /* Farming theme colors */
+    body {
+        background-color: #f5f9f2;
+        color: #3e4e1f;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        color: #556b2f;
+        font-weight: 700;
+        text-shadow: 1px 1px 2px #c4d6a7;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+        background-color: #4f6525;
+        border-color: #4f6525;
+        color: white;
+        font-weight: 600;
+    }
+
+        .btn-primary:hover {
+            background-color: #667a2a;
+            border-color: #667a2a;
+            color: white;
+        }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: #f9fbf1;
+        box-shadow: 0 0 10px rgba(127, 147, 0, 0.15);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+        table thead tr {
+            background-color: #7a9e3f;
+            color: white;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        table thead th,
+        table tbody td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #d8e1b3;
+        }
+
+        table tbody tr:hover {
+            background-color: #e6f0c9;
+        }
+</style>
+
 <h2>My Products</h2>
 
 <a class="btn btn-primary mb-3" asp-action="Create">Add New Product</a>
