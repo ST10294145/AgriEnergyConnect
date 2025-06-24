@@ -11,8 +11,6 @@ Welcome to the Agri-Energy Connect Platform! This prototype is designed to bridg
 - [✅ Testing](#testing)
 - [📺 Demo Video](#demo-video)
 - [📄 Database Scripts](#database-scripts)
-- [📄 Documentation](#documentation)
-- [📧 Contact](#contact)
 
 ## 🔍 Overview
 The Agri-Energy Connect Platform aims to create a digital ecosystem where farmers and green energy experts can collaborate. This prototype demonstrates essential functionalities such as user role management, product listings, and a responsive user interface.
