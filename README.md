@@ -10,7 +10,6 @@ Welcome to the Agri-Energy Connect Platform! This prototype is designed to bridg
 - [📝 Usage](#usage)
 - [✅ Testing](#testing)
 - [📺 Demo Video](#demo-video)
-- [📄 Database Scripts](#database-scripts)
 
 ## 🔍 Overview
 The Agri-Energy Connect Platform aims to create a digital ecosystem where farmers and green energy experts can collaborate. This prototype demonstrates essential functionalities such as user role management, product listings, and a responsive user interface.
@@ -50,10 +49,6 @@ To set up the development environment, follow these steps:
 - Test each functionality iteratively during development.
 
 ## 📺 Demo Video
-Check out the demo of the Agri-Energy Connect Platform on YouTube: [Watch the Demo](https://www.youtube.com/watch?v=your_video_id)
-
-## 📄 Database Scripts
-Below are the SQL scripts used to create and populate the database in SQL Server Management Studio (SSMS):
-
+Check out the demo of the Agri-Energy Connect Platform on YouTube: [Watch the Demo](https://youtu.be/VESO5sH-J34)
 
 Thank you for checking out the Agri-Energy Connect Platform prototype! 🌍✨
