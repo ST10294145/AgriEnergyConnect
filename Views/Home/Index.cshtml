@@ -1,8 +1,42 @@
-﻿@{
+﻿@model IEnumerable<AgriEnergyConnect.Models.Product>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-5">
+    <h1 class="display-4">Welcome to AgriEnergy Connect</h1>
+    <p class="lead">View and manage products posted by our farmers.</p>
+    <p>Explore all posted products or register/login to participate.</p>
+    <a asp-controller="Product" asp-action="AllProducts" class="btn btn-success mt-3">View All Products</a>
 </div>
+
+@if (Model != null && Model.Any())
+{
+    <h3>Latest Products</h3>
+    <table class="table table-bordered table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Farmer</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Production Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Farmer?.Name ?? "Unknown"</td>
+                    <td>@product.Name</td>
+                    <td>@product.Category</td>
+                    <td>@product.ProductionDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-muted">No products have been posted yet.</p>
+}
