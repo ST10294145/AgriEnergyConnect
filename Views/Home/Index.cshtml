@@ -5,7 +5,6 @@
 }
 
 <style>
-    /* Farming theme colors */
     body {
         background-color: #f5f9f2;
         color: #3e4e1f;
@@ -24,25 +23,33 @@
         margin-bottom: 1.5rem;
     }
 
-    a.btn-success {
-        background-color: #7a9e3f;
-        border-color: #7a9e3f;
+    .btn-custom {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
     }
 
-        a.btn-success:hover {
+    .btn-products {
+        background-color: #7a9e3f;
+        border: none;
+        color: white;
+    }
+
+        .btn-products:hover {
             background-color: #90b33f;
-            border-color: #90b33f;
             color: white;
         }
 
-    a.btn-primary {
+    .btn-register {
         background-color: #4f6525;
-        border-color: #4f6525;
+        border: none;
+        color: white;
     }
 
-        a.btn-primary:hover {
+        .btn-register:hover {
             background-color: #667a2a;
-            border-color: #667a2a;
             color: white;
         }
 
@@ -65,20 +72,15 @@
                 background-color: #dbe6af;
             }
 
-    /* Image shadows */
     img.shadow {
         box-shadow: 0 4px 8px rgba(89, 111, 15, 0.5);
         border-radius: 8px;
     }
 
-    /* Responsive adjustments */
     @@media (max-width: 767px) {
-        .lead
-
-    {
-        font-size: 1.1rem;
-    }
-
+        .lead {
+            font-size: 1.1rem;
+        }
     }
 </style>
 
@@ -87,15 +89,16 @@
     <p class="lead">View and manage products posted by our farmers.</p>
     <p>Explore all posted products or register/login to participate.</p>
 
-    <a asp-controller="Product" asp-action="AllProducts" class="btn btn-success mt-3">View All Products</a>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a asp-controller="Product" asp-action="AllProducts" class="btn btn-custom btn-products">🌾 View All Products</a>
 
-    @if (User.IsInRole("Employee"))
-    {
-        <a asp-controller="Employee" asp-action="RegisterFarmer" class="btn btn-primary mt-2 ms-2">Register New Farmer</a>
-    }
+        @if (User.IsInRole("Employee"))
+        {
+            <a asp-controller="Employee" asp-action="RegisterFarmer" class="btn btn-custom btn-register">👨‍🌾 Register New Farmer</a>
+        }
+    </div>
 </div>
 
-<!-- Images side by side -->
 <div class="row mb-4">
     <div class="col-md-6 mb-3">
         <img src="https://raw.githubusercontent.com/qknow/images/gh-pages/junior-high/form-1-science/monoculture.jpg"
