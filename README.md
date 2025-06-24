@@ -8,7 +8,6 @@ Welcome to the Agri-Energy Connect Platform! This prototype is designed to bridg
 - [📦 Installation](#installation)
 - [🔑 User Roles](#user-roles)
 - [📝 Usage](#usage)
-- [✅ Testing](#testing)
 - [📺 Demo Video](#demo-video)
 
 ## 🔍 Overview
@@ -43,10 +42,6 @@ To set up the development environment, follow these steps:
 1. Run the application from Visual Studio.
 2. Create a new account or log in with existing credentials.
 3. Navigate to the dashboard to access functionalities based on your user role.
-
-## ✅ Testing
-- Conduct user experience (UX) testing with sample users to gather feedback.
-- Test each functionality iteratively during development.
 
 ## 📺 Demo Video
 Check out the demo of the Agri-Energy Connect Platform on YouTube: [Watch the Demo](https://youtu.be/VESO5sH-J34)
