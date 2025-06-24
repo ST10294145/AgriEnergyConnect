@@ -5,6 +5,82 @@
     ViewData["Title"] = "Log in";
 }
 
+<style>
+    body {
+        background-color: #f4f7e7;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #3e4e1f;
+    }
+
+    h1, h2, h3 {
+        color: #556b2f;
+        font-weight: 700;
+    }
+
+    form {
+        background: #ffffff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(85, 107, 47, 0.3);
+        max-width: 420px;
+        margin: auto;
+    }
+
+    input.form-control {
+        border: 1.5px solid #a4b06e;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+    }
+
+        input.form-control:focus {
+            border-color: #667a2a;
+            box-shadow: 0 0 5px #667a2a;
+            outline: none;
+        }
+
+    label.form-label {
+        font-weight: 600;
+    }
+
+    button.btn-primary {
+        background-color: #667a2a;
+        border-color: #556b2f;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+        button.btn-primary:hover,
+        button.btn-primary:focus {
+            background-color: #556b2f;
+            border-color: #445520;
+        }
+
+    a {
+        color: #667a2a;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+        a:hover, a:focus {
+            color: #445520;
+            text-decoration: underline;
+        }
+
+    .checkbox label {
+        font-weight: 600;
+        color: #4a5a1a;
+    }
+
+    .text-danger {
+        color: #a94442;
+        font-weight: 600;
+    }
+
+    .form-floating > label {
+        color: #556b2f;
+    }
+</style>
+
 <h1>@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">
@@ -55,8 +131,10 @@
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article
+                                about setting up this ASP.NET application to support logging in via external services
+                            </a>.
                         </p>
                     </div>
                 }
