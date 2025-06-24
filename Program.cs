@@ -1,5 +1,5 @@
 using AgriEnergyConnect.Data;
-using AgriEnergyConnect.Models; // For ApplicationUser
+using AgriEnergyConnect.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +26,11 @@ namespace AgriEnergyConnect
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
+
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
@@ -36,7 +41,7 @@ namespace AgriEnergyConnect
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-                string[] roles = new[] { "Employee", "Farmer" };
+                string[] roles = { "Employee", "Farmer" };
 
                 foreach (var role in roles)
                 {

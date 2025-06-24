@@ -21,7 +21,6 @@ namespace AgriEnergyConnect.Controllers
             _userManager = userManager;
         }
 
-        // GET: Farmers can see their own products
         [Authorize(Roles = "Farmer")]
         public async Task<IActionResult> MyProducts()
         {
@@ -29,17 +28,16 @@ namespace AgriEnergyConnect.Controllers
             var products = await _context.Products
                 .Where(p => p.FarmerId == user.Id)
                 .ToListAsync();
+
             return View(products);
         }
 
-        // GET: Show product creation form
         [Authorize(Roles = "Farmer")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Save product
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Farmer")]
@@ -64,7 +62,6 @@ namespace AgriEnergyConnect.Controllers
             return RedirectToAction(nameof(MyProducts));
         }
 
-        // GET: Employee can view all products with filter
         [Authorize(Roles = "Employee")]
         public async Task<IActionResult> AllProducts(string category, DateTime? startDate, DateTime? endDate)
         {

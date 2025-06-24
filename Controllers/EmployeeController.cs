@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using AgriEnergyConnect.Data;              // DbContext namespace
+using AgriEnergyConnect.Data;
 using AgriEnergyConnect.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +12,7 @@ namespace AgriEnergyConnect.Controllers
     public class EmployeeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationDbContext _context;  // DbContext for FarmerProfile
+        private readonly ApplicationDbContext _context;
 
         public EmployeeController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
@@ -20,13 +20,11 @@ namespace AgriEnergyConnect.Controllers
             _context = context;
         }
 
-        // GET: Show the Register Farmer form
         public IActionResult RegisterFarmer()
         {
             return View();
         }
 
-        // POST: Handle Farmer registration
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterFarmer(RegisterFarmerViewModel model)
@@ -39,7 +37,6 @@ namespace AgriEnergyConnect.Controllers
                 UserName = model.Email,
                 Email = model.Email,
                 Name = model.Name
-                // Location is stored in FarmerProfile, not here
             };
 
             var result = await _userManager.CreateAsync(farmer, model.Password);
@@ -48,11 +45,10 @@ namespace AgriEnergyConnect.Controllers
             {
                 await _userManager.AddToRoleAsync(farmer, "Farmer");
 
-                // Create FarmerProfile with Name and Location from ViewModel
                 var farmerProfile = new FarmerProfile
                 {
                     UserId = farmer.Id,
-                    Name = model.Name,      // Must set Name here to avoid NULL insert error
+                    Name = model.Name,
                     Location = model.Location
                 };
 
@@ -73,7 +69,6 @@ namespace AgriEnergyConnect.Controllers
         }
     }
 
-    // ViewModel for Farmer registration
     public class RegisterFarmerViewModel
     {
         [Required]

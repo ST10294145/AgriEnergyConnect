@@ -1,0 +1,43 @@
+﻿@page
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<style>
+    body {
+        background-color: #f4f7e7;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #3e4e1f;
+        text-align: center;
+        padding: 50px;
+    }
+
+    h1 {
+        color: #a94442;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-top: 20px;
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 30px;
+        background-color: #7a9e3f;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 8px;
+    }
+
+        a:hover {
+            background-color: #90b33f;
+        }
+</style>
+
+<h1>Access Denied</h1>
+<p>You do not have permission to view this page.</p>
+<a asp-area="Identity" asp-page="/Account/Login">Return to Login</a>
